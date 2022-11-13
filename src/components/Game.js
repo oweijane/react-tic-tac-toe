@@ -70,7 +70,10 @@ export default class Game extends React.Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+    const winnerResult = calculateWinner(current.squares);
+    const winner = winnerResult ? winnerResult.winner : null;
+    const winnerSquarePositions = winnerResult ? winnerResult.winnerSquarePositions : [];
+    
 
     const moves = history.map((step, move) => {
       const desc = move ? `Move #${move}, (row: ${step.lastSquareClicked.row}, column: ${step.lastSquareClicked.col})` : 'Go to game start';
@@ -96,6 +99,7 @@ export default class Game extends React.Component {
           <Board 
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
+            winnerSquarePositions={winnerSquarePositions}
           />
         </div>
         <div className="game-info">

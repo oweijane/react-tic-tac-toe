@@ -8,6 +8,7 @@ export default class Board extends React.Component {
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
         key={i}
+        isWinningSquare={this.props.winnerSquarePositions.includes(i)}
       />
     );
   }
@@ -19,7 +20,7 @@ export default class Board extends React.Component {
       for(let j = 0; j < 3; j++) {
         row.push(this.renderSquare(3*i + j));
       }
-      
+
       squares.push(
         <div className="board-row" key={i}>
           {row}
