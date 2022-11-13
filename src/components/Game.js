@@ -13,6 +13,7 @@ export default class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      isChronologicalOrder: true,
     };
   }
 
@@ -60,6 +61,12 @@ export default class Game extends React.Component {
     }
   }
 
+  flipChronologicalOrder() {
+    this.setState({
+      isChronologicalOrder: !this.state.isChronologicalOrder,
+    });
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -93,7 +100,8 @@ export default class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <button onClick={() => this.flipChronologicalOrder()}></button>
+          <ol>{this.state.isChronologicalOrder ? moves : moves.slice().reverse()}</ol>
         </div>
       </div>
     );
